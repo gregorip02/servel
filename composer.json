@@ -1,0 +1,41 @@
+{
+    "name": "gregorip02/servel",
+    "description": "Workerman server adapter for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gregori Piñeres",
+            "email": "gregori.pineres02@gmail.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "workerman/workerman": "^4.0",
+        "laravel/framework": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Servel\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "./tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Servel\\ServelServiceProvider"
+            ]
+        }
+    },
+    "suggest": {
+        "ext-event": "For better performance."
+    }
+}

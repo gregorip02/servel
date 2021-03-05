@@ -24,3 +24,4 @@ php artisan servel status
 - [ ] Add command to restart the servers
 - [ ] Add watch feature for restarts in development mode
 - [ ] Suport for publish configuration file
+- [ ] Add support for parameters, cookies, files, headers, etc.

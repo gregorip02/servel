@@ -26,10 +26,10 @@ php artisan servel status
 
 ### TODO
 - [ ] Add tests
-- [ ] Allow servers to run in "daemon" mode
+- [ ] Add support for run in "daemon" mode
 - [ ] Add support for websockets
-- [ ] Add watch feature for restarts in development mode
+- [ ] Add support for restarts in development mode
 - [x] Add command to restart the servers
 - [x] Add command to stop the servers
-- [x] Suport for publish configuration file
+- [x] Add support for publish configuration file
 - [x] Add support for parameters, cookies, files, headers, etc.

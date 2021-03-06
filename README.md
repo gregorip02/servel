@@ -1,5 +1,9 @@
 # Servel - The Workerman Laravel Adapter
 
+[![Latest Stable Version](https://poser.pugx.org/gregorip02/servel/v)](//packagist.org/packages/gregorip02/servel)
+[![Total Downloads](https://poser.pugx.org/gregorip02/servel/downloads)](//packagist.org/packages/gregorip02/servel)
+[![License](https://poser.pugx.org/gregorip02/servel/license)](//packagist.org/packages/gregorip02/servel)
+
 **WIP**: This package provides a tcp entry point for your Laravel application,
 powered by the high-performance [Workerman](https://github.com/walkor/Workerman) server.
 

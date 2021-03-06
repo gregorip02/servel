@@ -1,0 +1,10 @@
+# Ignore all test and documentation with "export-ignore".
+/.gitattributes         export-ignore
+/.editorconfig          export-ignore
+/composer.lock          export-ignore
+/phpunit.xml.dist       export-ignore
+/.gitignore             export-ignore
+/.github                export-ignore
+/tests                  export-ignore
+/CHANGELOG.md           export-ignore
+/CONTRIBUTING.md        export-ignore

@@ -5,6 +5,7 @@ namespace Servel;
 use Closure;
 use Illuminate\Http\Request as LaravelRequest;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Workerman\Connection\TcpConnection;
 use Workerman\Events\EventInterface;
 use Workerman\Protocols\Http\Request as WorkermanRequest;
 use Workerman\Worker;
@@ -76,12 +77,10 @@ class Servel
         /** @var \Illuminate\Contracts\Http\Kernel $kernel */
         $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
 
-        return function ($connection, WorkermanRequest $request) use ($kernel) {
-            $response = $kernel->handle(
+        return function (TcpConnection $connection, WorkermanRequest $request) use ($kernel) {
+            $connection->close($kernel->handle(
                 $this->createLaravelRequest($request)
-            )->getContent();
-
-            $connection->send($response);
+            ));
         };
     }
 
@@ -93,11 +92,10 @@ class Servel
      */
     protected function createLaravelRequest(WorkermanRequest $request): LaravelRequest
     {
-        // TODO: Add support for parameters, cookies, files, headers, etc.
         return LaravelRequest::createFromBase(
             SymfonyRequest::create(
                 $request->uri(),
-                $request->method(),
+                $request->method()
             )
         );
     }

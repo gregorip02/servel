@@ -1,9 +1,15 @@
-# [WIP] Servel - The Workerman Laravel Adapter.
+# Servel - The Workerman Laravel Adapter.
+
+
 
 ## Install
 
 ```sh
+# Install the package
 composer require gregorip02/servel
+
+# Publish the configuration package
+php artisan vendor:publish --tag=servel-config
 ```
 
 ## Usage
@@ -23,5 +29,5 @@ php artisan servel status
 - [x] Add command to stop the servers
 - [x] Add command to restart the servers
 - [ ] Add watch feature for restarts in development mode
-- [ ] Suport for publish configuration file
+- [x] Suport for publish configuration file
 - [x] Add support for parameters, cookies, files, headers, etc.

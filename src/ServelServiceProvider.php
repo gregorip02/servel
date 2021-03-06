@@ -13,7 +13,7 @@ class ServelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom($this->configFilePath(), 'servel');
+        $this->mergeConfigFrom($this->packageBasePath('config/servel.php'), 'servel');
     }
 
     /**
@@ -26,6 +26,10 @@ class ServelServiceProvider extends ServiceProvider
             $this->commands([
                 StartServelCommand::class
             ]);
+
+            $this->publishes([
+                $this->packageBasePath('config/servel.php') => config_path('servel.php')
+            ], 'servel-config');
         }
     }
 
@@ -34,8 +38,8 @@ class ServelServiceProvider extends ServiceProvider
      *
      * @return string
      */
-    protected function configFilePath(): string
+    protected function packageBasePath(string $path = ''): string
     {
-        return __DIR__ . '/../config/servel.php';
+        return __DIR__ . "/../{$path}";
     }
 }

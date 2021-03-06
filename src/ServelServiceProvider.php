@@ -19,6 +19,7 @@ class ServelServiceProvider extends ServiceProvider
     /**
      * Register the config for publishing
      *
+     * @return void
      */
     public function boot(): void
     {

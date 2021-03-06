@@ -3,8 +3,9 @@
 namespace Servel;
 
 use Closure;
-use Illuminate\Http\Request as LaravelRequest;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request as LaravelRequest;
 use Workerman\Connection\TcpConnection;
 use Workerman\Events\EventInterface;
 use Workerman\Protocols\Http\Request as WorkermanRequest;
@@ -26,10 +27,13 @@ class Servel
     {
         $config = config('servel');
 
-        collect($config['servers'])->each(function (array $server) {
+        /** @var \Illuminate\Contracts\Http\Kernel $kernel */
+        $kernel = app(Kernel::class);
+
+        collect($config['servers'])->each(function (array $server) use ($kernel) {
             $worker = new Worker($server['name'], $server['context'] ?? []);
             $worker->count = $server['count'] ?? 4;
-            $worker->onMessage = $this->onMessage();
+            $worker->onMessage = $this->onMessage($kernel);
         });
 
         Worker::runAll();
@@ -60,7 +64,7 @@ class Servel
     /**
      * Get global event-loop instance.
      *
-     * @return Workerman\Events\EventInterface
+     * @return \Workerman\Events\EventInterface
      */
     public function loop(): EventInterface
     {
@@ -70,13 +74,11 @@ class Servel
     /**
      * Generic message handler.
      *
-     * @return Closure
+     * @param  \Illuminate\Contracts\Http\Kernel $kernel
+     * @return \Closure
      */
-    protected function onMessage(): Closure
+    protected function onMessage(Kernel $kernel): Closure
     {
-        /** @var \Illuminate\Contracts\Http\Kernel $kernel */
-        $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
-
         return function (TcpConnection $connection, WorkermanRequest $request) use ($kernel) {
             $connection->close($kernel->handle(
                 $this->createLaravelRequest($request)
@@ -87,8 +89,8 @@ class Servel
     /**
      * Create a Laravel request from incomming Workerman request.
      *
-     * @param  Workerman\Protocols\Http\Request $request
-     * @return Illuminate\Http\Request
+     * @param  \Workerman\Protocols\Http\Request $request
+     * @return \Illuminate\Http\Request
      */
     protected function createLaravelRequest(WorkermanRequest $request): LaravelRequest
     {

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'watch' => env('APP_DEBUG', false),
+
     /*
     |--------------------------------------------------------------------------
     | Server definition

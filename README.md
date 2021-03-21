@@ -1,4 +1,4 @@
-# Servel - The Workerman Laravel Adapter
+# Servel - [Workerman](https://github.com/walkor/Workerman) adapter for Laravel.
 
 [![Latest Stable Version](https://poser.pugx.org/gregorip02/servel/v)](//packagist.org/packages/gregorip02/servel)
 [![Total Downloads](https://poser.pugx.org/gregorip02/servel/downloads)](//packagist.org/packages/gregorip02/servel)
